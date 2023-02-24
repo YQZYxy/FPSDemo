@@ -46,6 +46,16 @@ void AItemBaseClass::Tick(float DeltaTime)
 
 }
 
+void AItemBaseClass::OnOverlayBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+
+}
+
+void AItemBaseClass::OnOverlayEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+
+}
+
 //void AItemBaseClass::NotifyActorBeginOverlap(AActor* OtherActor)
 //{
 //}

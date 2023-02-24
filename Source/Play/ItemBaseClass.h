@@ -26,6 +26,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//virtual void NotifyActorBeginOverlap(AActor* OtherActor);
+	//virtual void NotifyActorEndOverlap(AActor* OtherActor);
+
+	UFUNCTION()
+	virtual void OnOverlayBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION()
+	virtual void OnOverlayEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 public:
 	
@@ -68,8 +75,7 @@ public:
 
 public:
 
-	//virtual void NotifyActorBeginOverlap(AActor* OtherActor);
-	//virtual void NotifyActorEndOverlap(AActor* OtherActor);
+
 
 	//生成丢弃物品
 	UFUNCTION(BlueprintCallable)

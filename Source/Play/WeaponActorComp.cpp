@@ -91,23 +91,28 @@ void UWeaponActorComp::Fire()
 				AmmunitionAmount_Now--;
 
 				//播放枪声
-				
+
 				//从武器骨骼枪口插槽发射子弹
 				FActorSpawnParameters SpawnParameters;
 				SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				FTransform MuzzleSocketTransform = WeaponMesh->GetSocketTransform(MuzzleFlashSocket, RTS_World);
+
 				AFPSProjectile * ProjectileTest = GetWorld()->SpawnActor<AFPSProjectile>(Projectile, MuzzleSocketTransform.GetLocation(), MuzzleSocketTransform.GetRotation().Rotator(), SpawnParameters);
 
-				ProjectileTest->BaseDamage = Damage;  //设置子弹伤害
+				//设置子弹伤害
+				ProjectileTest->BaseDamage = Damage;  
 
 				//从武器骨骼弹壳插槽抛出弹壳
 				FTransform BulletShellSocketTransform = WeaponMesh->GetSocketTransform(BulletShellSocket, RTS_World);
+
 				GetWorld()->SpawnActor<AFPSProjectShell>(ProjectShell, BulletShellSocketTransform.GetLocation(), BulletShellSocketTransform.GetRotation().Rotator(), SpawnParameters);
 
 				//生成粒子
 				if (!bParticleIsValid)
 				{
-					MuzzleParticleComp = UGameplayStatics::SpawnEmitterAttached(MuzzleFX, WeaponMesh, FName(""), MuzzleSocketTransform.GetLocation(), MuzzleSocketTransform.GetRotation().Rotator(), FVector(1.0f), EAttachLocation::KeepWorldPosition, false, EPSCPoolMethod::None, true);
+					FVector WeaponMeshScale = WeaponMesh->GetComponentScale();
+
+					MuzzleParticleComp = UGameplayStatics::SpawnEmitterAttached(MuzzleFX, WeaponMesh, FName(""), MuzzleSocketTransform.GetLocation(), MuzzleSocketTransform.GetRotation().Rotator(), WeaponMeshScale, EAttachLocation::KeepWorldPosition, false, EPSCPoolMethod::None, true);
 
 					bParticleIsValid = true;
 				}

@@ -4,35 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "BossActorDelegate.generated.h"
+#include "RotaryMechanism.generated.h"
 
-DECLARE_DELEGATE(FOnBossDiedDelegate);  //Declare Delegate
 UCLASS()
-class PLAY_API ABossActorDelegate : public AActor
+class PLAY_API ARotaryMechanism : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABossActorDelegate();
+	ARotaryMechanism();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
-		class UBoxComponent* BoxComp;
-
-	UFUNCTION()
-		void HandleBossDiedEvent();
-
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor);
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	FOnBossDiedDelegate OnBossDied;
 
 };
